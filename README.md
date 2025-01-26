@@ -86,11 +86,11 @@ python test.py \
 ---
 
 ## Results
-- **Treatment Recommendations**: Interpretability analysis of EAGLE-Net VS attention-based techniques. The first row of the figure illustrates a pathologist annotated slide alongside the attention heatmaps produced by Gated-Attention, CLAM, and the proposed EAGLE-Net. The second row shows zoomed-in regions in black square
+- **Performance Comparison**: Interpretability analysis of EAGLE-Net VS attention-based techniques. The first row of the figure illustrates a pathologist annotated slide alongside the attention heatmaps produced by Gated-Attention, CLAM, and the proposed EAGLE-Net. The second row shows zoomed-in regions in black square
 
 ![attention map](./Assets/attention_map.png)
 
-- **Improved Outcomes**: Interpretablity and Visualization of ROIs in TCGA Subtyping using EAGLE-Net.
+- **TCGA Attention Map**: Interpretablity and Visualization of ROIs in TCGA Subtyping using EAGLE-Net.
   
 ![attention tcga](./Assets/attention_TCGA.png)
 
