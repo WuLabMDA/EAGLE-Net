@@ -55,25 +55,10 @@ Prepare your data using the following pipeline:
 
 2. **Feature Embedding**: Extract feature embeddings for patches using a pre-trained model.
 
----
-
 ## Training
 
 To train the EAGLE-Net model, use:
 
-```bash
-python train_model.py \
-    --train_csv ./data/train.csv \
-    --data_paths ./train/LUAD,./train/LUSC \
-    --packing_paths ./packing/LUAD,./packing/LUSC \
-    --patch_size 2048 \
-    --n_classes 2 \
-    --embed_dim 512 \
-    --epochs 50 \
-    --batch_size 16 \
-    --learning_rate 0.001 \
-    --save_path ./models/eagle_net.pth
-```
 ```python
 python train_model.py \
       --train_csv './git_split/TCGA_lung_training_df.csv' \
@@ -84,7 +69,6 @@ python train_model.py \
       --save_path './models/eagle_net.pth'
       --data_paths './test/LUAD,./test/LUSC' \
 ```
----
 
 ## Testing
 
