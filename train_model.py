@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 23 23:00:16 2025
 
-@author: mwaqas
-"""
 
 import argparse
 import torch
