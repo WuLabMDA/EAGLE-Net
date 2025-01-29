@@ -98,6 +98,15 @@ python test.py \
   
 ![biological correlation](./Assets/biological_corrolation.png)
 
+**Quantitative Performance**: The table below summarizes the quantitative performance of different attention-based WSI classification methods on a tumor-masking task. Metrics include Dice, False Positive Rate (FPR), Precision, Recall, Specificity, and F1-Score. EAGLE-Net achieves the highest Dice and F1-Score while also exhibiting the lowest FPR, demonstrating its superior ability to capture clinically relevant tumor regions accurately.
+
+| **Algorithm**     | **Dice** | **FPR**  | **Precision** | **Recall** | **Specificity** | **F1-Score** |
+|-------------------|---------:|---------:|--------------:|----------:|----------------:|-------------:|
+| Attention         | 0.4886   | 0.0215   | 0.9157        | 0.3333    | 0.9785          | 0.4886       |
+| Gated-Attention   | 0.4849   | 0.0236   | 0.9079        | 0.3309    | 0.9764          | 0.4849       |
+| CLAM              | 0.5044   | 0.0136   | 0.9458        | 0.3440    | 0.9864          | 0.5044       |
+| **EAGLE-Net**     | **0.5185** | **0.0073** | **0.9713**    | **0.3539** | **0.9927**      | **0.5185**   |
+
 ---
 ## Citation
 
