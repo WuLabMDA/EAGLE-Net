@@ -28,38 +28,43 @@ class PatchEmbed(nn.Module):
 
     def forward(self, x):
         return self.feature_extractor_part1(x)
+import torch
+import torch.nn as nn
+import gc
+
+
 
 class MASE(nn.Module):
-    """A 3D CNN architecture with multiple filter sizes."""
-    def __init__(self):
+    """A 3D CNN architecture with multiple filter sizes + dropout."""
+    def __init__(self, dropout_p=0.3):
         super(MASE, self).__init__()
         self.conv1x1 = nn.Conv3d(1, 8, kernel_size=1, stride=1, padding=0)
         self.conv3x3 = nn.Conv3d(1, 8, kernel_size=3, stride=1, padding=1)
         self.conv5x5 = nn.Conv3d(1, 8, kernel_size=5, stride=1, padding=2)
         self.conv7x7 = nn.Conv3d(1, 8, kernel_size=7, stride=1, padding=3)
+
         self.relu = nn.ReLU()
+        self.dropout = nn.Dropout3d(p=dropout_p)  # shared dropout
+
         self.conv_reduce = nn.Conv3d(32, 1, kernel_size=1, stride=1, padding=0)
         self.pool = nn.MaxPool3d(kernel_size=2, stride=2)
 
     def forward(self, x):
-        x1 = self.relu(self.conv1x1(x))
-        x3 = self.relu(self.conv3x3(x))
-        x5 = self.relu(self.conv5x5(x))
-        x7 = self.relu(self.conv7x7(x))
-        # print(x1.shape,  x3.shape, x5.shape, x7.shape)
+        x1 = self.dropout(self.relu(self.conv1x1(x)))
+        x3 = self.dropout(self.relu(self.conv3x3(x)))
+        x5 = self.dropout(self.relu(self.conv5x5(x)))
+        x7 = self.dropout(self.relu(self.conv7x7(x)))
+
         cat_x = torch.cat([x1, x3, x5, x7], dim=1).contiguous()
-      
         
-        x =  self.relu(self.conv_reduce(cat_x)) + x
-        
+        x = self.dropout(self.relu(self.conv_reduce(cat_x))) + x
+
         del cat_x, x1, x3, x5, x7
         torch.cuda.empty_cache()
         gc.collect()
-        
-      
-        
-        
+
         return x
+
 def get_neighbors(row_vector, col_vector, max_rows, max_cols, device = 'cuda'):
     """
     Get all neighbors (including diagonals) for each index in row_vector and col_vector.
